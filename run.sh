@@ -1,6 +1,8 @@
 #!/bin/sh
 docker_image=michalsvorc/youtube-dl
 download_folder=dwn
+audio_format=mp3
+video_format='bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
 
 show_help() {
     cat <<HELP
@@ -29,16 +31,16 @@ die() {
 [[ $# -eq 0 ]] && die 'No arguments provided'
 [[ -z "$2" ]] && die 'No URL argument provided'
 
-create_download_folder () {
+create_download_folder() {
     mkdir -p "${PWD}/$download_folder"
 }
 
-download_audio () {
-    docker run -it --rm -v "${PWD}/$download_folder:/$download_folder" $docker_image -x --audio-format mp3 $1
+download_audio() {
+    docker run -it --rm -v "${PWD}/$download_folder:/$download_folder" $docker_image -x --audio-format $audio_format $1
 }
 
-download_video () {
-    docker run -it --rm -v "${PWD}/$download_folder:/$download_folder" $docker_image $1
+download_video() {
+    docker run -it --rm -v "${PWD}/$download_folder:/$download_folder" $docker_image --format $video_format $1
 }
 
 case $1 in
