@@ -11,4 +11,4 @@ RUN apk update --repository $edge_repository \
     && wget $youtube_dl_source -O $youtube_dl_bin \
     && chmod a+rx $youtube_dl_bin
 
-ENTRYPOINT ["youtube-dl"]
+ENTRYPOINT ["youtube-dl", "-o", "/dwn/%(title)s.%(ext)s"]
