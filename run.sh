@@ -28,18 +28,24 @@ die() {
     exit 1
 }
 
-[[ $# -eq 0 ]] && die 'No arguments provided'
-[[ -z "$2" ]] && die 'No URL argument provided'
+[[ -z "$1" ]] && die 'No COMMAND argument provided'
 
+test_url_arg() {
+    [[ -z "$1" ]] && die 'No URL argument provided'
+}
 create_download_folder() {
     mkdir -p "${PWD}/$download_folder"
 }
 
 download_audio() {
+    test_url_arg $1
+    create_download_folder
     docker run -it --rm -v "${PWD}/$download_folder:/$download_folder" $docker_image -x --audio-format $audio_format $1
 }
 
 download_video() {
+    test_url_arg $1
+    create_download_folder
     docker run -it --rm -v "${PWD}/$download_folder:/$download_folder" $docker_image --format $video_format $1
 }
 
@@ -48,11 +54,9 @@ case $1 in
         show_help
         ;;
     audio)
-        create_download_folder
         download_audio $2
         ;;
     video)
-        create_download_folder
         download_video $2
         ;;
     *)
