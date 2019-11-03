@@ -1,6 +1,6 @@
 #!/bin/sh
 docker_image=michalsvorc/youtube-dl
-download_folder=dwn
+download_folder=downloads
 audio_format=mp3
 video_format='bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
 
