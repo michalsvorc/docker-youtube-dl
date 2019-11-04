@@ -6,7 +6,7 @@ ARG youtube_dl_bin=/usr/local/bin/youtube-dl
 ARG username=youtube-dl
 
 RUN apk update --repository $edge_repository \
-    && apk add ffmpeg --repository $edge_repository \
+    && apk add ffmpeg \
     && apk add python --repository $edge_repository \
     && rm -rf /var/cache/apk/* \
     && wget $youtube_dl_source -O $youtube_dl_bin \
