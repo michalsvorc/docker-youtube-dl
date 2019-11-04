@@ -39,7 +39,7 @@ https://www.youtube.com/watch?v=a1b2C3D4E5f
 youtube-dl tries to download the [best available quality](https://github.com/ytdl-org/youtube-dl#format-selection) by default.
 
 ### Certificate errors
-Try to rebuild the docker image with `--no-cache` option to get the latest version of youtube-dl.
+Rebuild docker image with `--no-cache` build option to get latest version of youtube-dl.
 
 ### ERROR: unable to open for writing: [Errno 13] Permission denied
 Check permissions for download directory specified in `-v <download-directory-full-path>:/opt/youtube-dl`. Download directory should be writable by non-system users.
