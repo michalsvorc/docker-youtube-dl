@@ -13,6 +13,6 @@ RUN apk update --repository $edge_repository \
     && chmod a+rx $youtube_dl_bin \
     && adduser -D -u 1000 $username
 
-USER ${username}
+USER $username
 
 ENTRYPOINT ["youtube-dl", "-o", "/opt/youtube-dl/%(title)s.%(ext)s"]
