@@ -9,7 +9,7 @@ RUN apk add --no-cache --update ffmpeg \
     && apk add --no-cache --update --repository $edge_repository python \
     && wget $youtube_dl_source -O $youtube_dl_bin \
     && chmod a+rx $youtube_dl_bin \
-    && adduser -D -u 1000 $username
+    && adduser -D -H -u 1000 $username
 
 USER $username
 
