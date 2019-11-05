@@ -5,10 +5,8 @@ ARG youtube_dl_source=https://yt-dl.org/downloads/latest/youtube-dl
 ARG youtube_dl_bin=/usr/local/bin/youtube-dl
 ARG username=youtube-dl
 
-RUN apk update --repository $edge_repository \
-    && apk add ffmpeg \
-    && apk add python --repository $edge_repository \
-    && rm -rf /var/cache/apk/* \
+RUN apk add --no-cache --update ffmpeg \
+    && apk add --no-cache --update --repository $edge_repository python \
     && wget $youtube_dl_source -O $youtube_dl_bin \
     && chmod a+rx $youtube_dl_bin \
     && adduser -D -u 1000 $username
