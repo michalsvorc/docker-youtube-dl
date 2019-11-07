@@ -1,7 +1,7 @@
-# youtube-dl
-Executable docker container with [youtube-dl](https://github.com/ytdl-org/youtube-dl) as entry point.
-- based on Alpine linux
-- downloads latest youtube-dl binary in docker build
+# [youtube-dl](https://github.com/ytdl-org/youtube-dl) docker image
+- based on Alpine Linux
+- builds executable docker container
+- downloads latest youtube-dl binary from the official source
 - contains [ffmpeg](https://ffmpeg.org/) for converting video files to audio-only files
 
 ## Build
@@ -35,6 +35,7 @@ https://www.youtube.com/watch?v=a1b2C3D4E5f
 ```
 
 ## FAQ
+
 ### Best video and audio quality
 youtube-dl tries to download the [best available quality](https://github.com/ytdl-org/youtube-dl#format-selection) by default.
 
