@@ -1,6 +1,6 @@
-# [youtube-dl](https://github.com/ytdl-org/youtube-dl) docker image
+# [youtube-dl](https://github.com/ytdl-org/youtube-dl) Docker image
 - based on Alpine Linux
-- builds executable docker container
+- executable Docker container
 - downloads latest youtube-dl binary from the official source
 - contains [ffmpeg](https://ffmpeg.org/) for converting video files to audio-only files
 
@@ -15,10 +15,10 @@ docker run -it --rm -v "<download-directory-full-path>:/opt/youtube-dl" michalsv
 <youtube-url>
 ```
 ### Download directory
-Specify full path to directory on your host system. This directory should be pre-existing and writable by non-system users, otherwise it will be created by docker with `root:root` owner, which might cause permissions error. Use `${PWD}/downloads` when running from cloned repository to use default `downloads` directory.
+Specify full path to directory on your host system. This directory should be pre-existing and writable by non-system users, otherwise it will be created by Docker with `root:root` owner, which might cause permissions error. Use `${PWD}/downloads` when running from cloned repository to use default `downloads` directory.
 
 ### Options
-You can provide additional [youtube-dl options](https://github.com/ytdl-org/youtube-dl#options), with exception of `"-o, --output"` which is hard coded in docker image for proper volume binding on runtime.
+You can provide additional [youtube-dl options](https://github.com/ytdl-org/youtube-dl#options), with exception of `"-o, --output"` which is hard coded in Docker image for proper volume binding on runtime.
 
 #### Video format
 `--format <video_format>`
@@ -40,7 +40,7 @@ https://www.youtube.com/watch?v=a1b2C3D4E5f
 youtube-dl tries to download the [best available quality](https://github.com/ytdl-org/youtube-dl#format-selection) by default.
 
 ### Certificate errors
-Rebuild docker image with `--no-cache` build option to get latest version of youtube-dl.
+Rebuild Docker image with `--no-cache` build option to get latest version of youtube-dl.
 
 ### ERROR: unable to open for writing: [Errno 13] Permission denied
 Check permissions for download directory specified in `-v <download-directory-full-path>:/opt/youtube-dl`. Download directory should be writable by non-system users.
