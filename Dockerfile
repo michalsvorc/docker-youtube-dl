@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3
 
 ARG user_name=${user_name:-youtube-dl}
 ARG user_id=${user_id:-1000}
