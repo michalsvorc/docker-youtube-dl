@@ -26,9 +26,8 @@ docker run -it --rm -v "<host-download-directory-full-path>:/opt/youtube-dl" mic
 ```
 
 ### Run example
-Use `${PWD}/downloads` when running from project root directory to use default `./downloads` directory.
 ```bash
-docker run -it --rm -v "${PWD}/downloads:/opt/youtube-dl" michalsvorc/youtube-dl \
+docker run -it --rm -v "${PWD}:/opt/youtube-dl" michalsvorc/youtube-dl \
 -x --audio-format mp3 \
 https://www.youtube.com/watch?v=a1b2C3D4E5f https://www.youtube.com/watch?v=1B2c3d4e5F6
 ```
