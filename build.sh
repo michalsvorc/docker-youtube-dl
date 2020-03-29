@@ -1,6 +1,9 @@
-#!/bin/sh
-# Author: Michal Svorc <michal@svorc.sk>
+#!/bin/bash
+# Author: Michal Svorc <michalsvorc.com>
 # Build Docker image
-# Optionally pass additional arguments for Docker build command
 
-docker build . -t michalsvorc/youtube-dl ${1}
+# Docker build
+docker build \
+    --no-cache \
+    --tag 'michalsvorc/youtube-dl:latest' \
+    .

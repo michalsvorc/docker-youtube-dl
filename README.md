@@ -1,36 +1,34 @@
 # [youtube-dl](https://github.com/ytdl-org/youtube-dl) Docker image
 - based on Alpine Linux
 - executable Docker container
-- downloads latest youtube-dl binary from the official source
-- contains [ffmpeg](https://ffmpeg.org/) for converting video files to audio-only files
+- latest youtube-dl binary from the official source
+- [ffmpeg](https://ffmpeg.org/) for converting video to audio files
 
 ## Build
-Execute `build.sh` script in project root directory. Optionally pass additional arguments for Docker [build command](https://docs.docker.com/engine/reference/commandline/build/). To supply multiple arguments or arguments with spaces, pass them surrounded by `''`. 
-Example: `./build.sh '--arg1 --arg2 key=val'`
-
-### youtube-dl options
-Provide additional [youtube-dl options](https://github.com/ytdl-org/youtube-dl#options), with exception of `"-o, --output"` which is hard coded in Docker image for proper volume binding on runtime.
-
-#### Video format option
-`--format <video_format>`
-
-#### Audio-only format option
-`-x --audio-format <audio_format>`
+Execute `build.sh` script.
 
 ## Run
 youtube-dl can download 1:n URLs in single execution.
+
 ```bash
-docker run -it --rm -v "<host-download-directory-full-path>:/opt/youtube-dl" michalsvorc/youtube-dl \
-[youtube-dl-options] \
-<youtube-url-1 youtube-url-2 ... youtube-url-n>
+docker run \
+-it \
+--rm \
+--mount type=bind,source="${PWD}/downloads",target='/opt/youtube-dl' \
+michalsvorc/youtube-dl \
+[youtube-dl options] \
+<youtube-url_1> <youtube-url_2> ... <youtube-url_n>
 ```
 
-### Run example
-```bash
-docker run -it --rm -v "${PWD}:/opt/youtube-dl" michalsvorc/youtube-dl \
--x --audio-format mp3 \
-https://www.youtube.com/watch?v=a1b2C3D4E5f https://www.youtube.com/watch?v=1B2c3d4e5F6
-```
+## youtube-dl options
+See list of [youtube-dl options](https://github.com/ytdl-org/youtube-dl#options).
+`"-o, --output"` is hard-coded in Docker image for proper volume binding on runtime.
+
+### Video format option
+`--format <video_format>`
+
+### Audio-only format option
+`-x --audio-format <audio_format>`
 
 ## FAQ
 
@@ -38,11 +36,12 @@ https://www.youtube.com/watch?v=a1b2C3D4E5f https://www.youtube.com/watch?v=1B2c
 youtube-dl tries to download the [best available quality](https://github.com/ytdl-org/youtube-dl#format-selection) by default.
 
 ### Certificate errors
-Rebuild Docker image with `./build.sh '--no-cache'` option to get latest version of youtube-dl binary.
+Rebuild Docker image to get the latest version of youtube-dl binary.
 
 ### ERROR: unable to open for writing: [Errno 13] Permission denied
-Download directory should pre-exist on host system and should be writable by group with `gid=1000`.
-
-GID can be changed by passing `'--build-arg group_id=<N>'` to `build.sh` script.
-
-Run `chown $(id -u):1000 <directory>` and `chmod g+w -R <directory>` to make directory writable by `gid=1000`.
+Download directory must pre-exist on host system and should be writable by group with id `1000`. Execute this command in project root directory:
+```bash
+mkdir -p "${PWD}"/downloads \
+&& chown -R $(id -u):1000 "${PWD}"/downloads \
+&& chmod -R g+w "${PWD}"/downloads
+```
