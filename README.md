@@ -13,14 +13,26 @@ Execute `build.sh` script.
 
 youtube-dl can download 1:n URLs in a single execution.
 
+Syntax:
+```bash
+docker run \
+-it \
+--rm \
+--mount type=bind,source="<host_directory_path>",target='/opt/youtube-dl' \
+michalsvorc/youtube-dl \
+[youtube-dl options] \
+<youtube_url_1> <youtube_url_2> ... <youtube_url_n>
+```
+
+Example to downlad an MP3 audio format:
 ```bash
 docker run \
 -it \
 --rm \
 --mount type=bind,source="${PWD}/downloads",target='/opt/youtube-dl' \
 michalsvorc/youtube-dl \
-[youtube-dl options] \
-<youtube-url_1> <youtube-url_2> ... <youtube-url_n>
+-x --audio-format mp3 \
+https://www.youtube.com/watch?v=a1b2c3d4e5f
 ```
 
 ## youtube-dl options
